@@ -1,145 +1,407 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💖 Eu Te Amo</title>
-  <style>
-    :root {
-      --main-color: #ff4f8b;
-      --bg: #1a1b2f;
-      --text: #fff;
-      --accent: #ffd86b;
-    }
-    body {
-      margin: 0; padding: 0;
-      background: var(--bg);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      min-height: 100vh;
-      font-family: 'Segoe UI', 'Arial', sans-serif;
-      color: var(--text);
-    }
-    .container {
-      width: 95vw; max-width: 370px; text-align: center;
-      margin-top: 35px;
-      background: rgba(30, 33, 56, 0.95);
-      padding: 2rem 1.2rem 1.2rem 1.2rem;
-      border-radius: 24px;
-      box-shadow: 0 2px 14px #0002;
-    }
-    h1 {
-      font-size: 2.1em; margin-bottom: 0.6em;
-      letter-spacing: 1px;
-    }
-    .heart {
-      font-size: 3em;
-      cursor: pointer;
-      display: inline-block;
-      transition: transform 0.15s;
-      animation: pulse 1.2s infinite;
-      margin-bottom: 1em;
-    }
-    .heart:active {
-      transform: scale(1.23);
-    }
-    @keyframes pulse {
-      0%,100% { transform: scale(1);}
-      50% { transform: scale(1.13);}
-    }
-    .msg-box {
-      min-height: 75px;
-      margin-bottom: 1.1em;
-      background: #fff2;
-      border-radius: 10px;
-      padding: 0.9em 0.4em;
-      font-size: 1.1em;
-      line-height: 1.5;
-    }
-    .controls {
-      display: flex; justify-content: center; gap: 12px;
-    }
-    button, input[type="text"] {
-      background: #fff1;
-      color: #fff;
-      border: none;
-      border-radius: 9px;
-      padding: 0.7em 1em;
-      font-size: 1em;
-      margin: 0.1em 0;
-      outline: none;
-      transition: background 0.15s, box-shadow 0.15s;
-    }
-    button:hover { background: var(--main-color); color: #fff; }
-    input[type="text"] { width: 78%; }
-    .footer {
-      margin-top: 2em; font-size: .89em;
-      color: #fff6; text-align: center;
-    }
-    @media (max-width: 500px) {
-      .container {padding: 0.9rem 0.4rem;}
-      h1 {font-size:1.28em;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Declaração de Amor Animada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Tela de entrada */
+        .entrada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .entrada.oculto {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .entrada h1 {
+            color: #ff6b9d;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #ff6b9d;
+        }
+
+        .entrada input {
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: 2px solid #ff6b9d;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            width: 300px;
+        }
+
+        .entrada input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .entrada button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .entrada button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Título personalizado */
+        .titulo {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2em;
+            color: #ff6b9d;
+            text-shadow: 0 0 30px #ff6b9d;
+            animation: brilho 3s ease-in-out infinite alternate;
+            z-index: 100;
+        }
+
+        @keyframes brilho {
+            0% { text-shadow: 0 0 30px #ff6b9d; }
+            100% { text-shadow: 0 0 50px #ff6b9d, 0 0 80px #ff6b9d; }
+        }
+
+        /* Corações flutuantes com frases */
+        .coracao {
+            position: absolute;
+            font-size: 1.2em;
+            color: #fff;
+            text-align: center;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: flutuar 6s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .coracao:hover {
+            transform: scale(1.2);
+        }
+
+        /* Formato de coração usando CSS */
+        .coracao::before {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            z-index: -1;
+        }
+
+        .coracao::after {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            border-radius: 50px 50px 0 0;
+            transform: rotate(45deg);
+            z-index: -1;
+            left: -80px;
+        }
+
+        .coracao .texto {
+            position: relative;
+            z-index: 10;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            line-height: 1.4;
+        }
+
+        /* Animação de flutuação */
+        @keyframes flutuar {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(2deg); }
+            50% { transform: translateY(-60px) rotate(0deg); }
+            75% { transform: translateY(-30px) rotate(-2deg); }
+        }
+
+        /* Posicionamento dos corações */
+        .coracao:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .coracao:nth-child(2) { right: 10%; top: 15%; animation-delay: 1s; }
+        .coracao:nth-child(3) { left: 20%; bottom: 25%; animation-delay: 2s; }
+        .coracao:nth-child(4) { right: 20%; bottom: 20%; animation-delay: 3s; }
+        .coracao:nth-child(5) { left: 50%; top: 30%; animation-delay: 4s; }
+        .coracao:nth-child(6) { left: 35%; bottom: 35%; animation-delay: 5s; }
+
+        /* Partículas de coração */
+        .particula {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b9d;
+            animation: subir 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes subir {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Botão de nova mensagem */
+        .novo-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            z-index: 500;
+        }
+
+        .novo-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .coracao {
+                width: 150px;
+                height: 150px;
+                font-size: 1em;
+            }
+            
+            .coracao::before,
+            .coracao::after {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .coracao::after {
+                left: -60px;
+            }
+            
+            .titulo {
+                font-size: 1.8em;
+                top: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <form class="container" id="formName">
-    <h1>Mensagem Especial</h1>
-    <input type="text" id="nome" maxlength="30" placeholder="Digite o nome" autocomplete="off" required>
-    <button type="submit">Iniciar 💌</button>
-  </form>
-  <div class="container" id="expContainer" style="display:none">
-    <div class="heart" id="heart">❤️</div>
-    <div id="title"></div>
-    <div class="msg-box" id="msg"></div>
-    <div class="controls">
-      <button onclick="antMsg()" type="button">⟨</button>
-      <button onclick="proxMsg()" type="button">⟩</button>
+    <!-- Tela de entrada -->
+    <div class="entrada" id="entrada">
+        <h1>💖 Mensagem Especial</h1>
+        <input type="text" id="nomeInput" placeholder="Digite o nome da pessoa amada" maxlength="25">
+        <button onclick="iniciarAnimacao()">Começar Magia ✨</button>
     </div>
-  </div>
-  <div class="footer">Feito com 💝 para alguém muito especial.</div>
-  <script>
-    const mensagens = [
-      "Você é a razão do meu sorriso todos os dias.",
-      "Quando penso em felicidade, penso em você.",
-      "Seu abraço é meu lugar favorito.",
-      "Entre bilhões, você é único(a) para mim.",
-      "Te amar é muito fácil.",
-      "Com você, até o silêncio é confortável.",
-      "Meu coração é seu, sempre.",
-      "Sou melhor por te ter comigo.",
-      "Você é o meu sonho realizado.",
-      "Eu só quero te fazer feliz."
-    ];
 
-    let atual = 0;
-    let nomeAlvo = "";
+    <!-- Container principal -->
+    <div class="container" id="container">
+        <div class="titulo" id="titulo">Para Alguém Especial ❤️</div>
+        
+        <!-- Corações com frases serão inseridos aqui -->
+    </div>
 
-    const frm = document.getElementById('formName');
-    const exp = document.getElementById('expContainer');
-    const title = document.getElementById('title');
-    const msg = document.getElementById('msg');
-    const heart = document.getElementById('heart');
+    <button class="novo-btn" onclick="novasMensagens()">💕 Renovar</button>
 
-    frm.onsubmit = (e) => {
-      e.preventDefault();
-      nomeAlvo = document.getElementById('nome').value.trim();
-      title.innerHTML = nomeAlvo ? `Para <b>${nomeAlvo}</b>` : "Para você 💖";
-      frm.style.display = "none";
-      exp.style.display = "block";
-      atual = 0;
-      renderMsg();
-    };
+    <script>
+        const frasesAmor = [
+            "Eu te amo mais que tudo",
+            "Você é minha vida",
+            "Meu coração é seu",
+            "Amo seu sorriso",
+            "Você me completa",
+            "Minha alma gêmea",
+            "Te amo infinitamente",
+            "Você é meu mundo",
+            "Meu amor eterno",
+            "Minha felicidade",
+            "Você é perfeita",
+            "Meu grande amor",
+            "Minha princesa",
+            "Você é especial",
+            "Minha razão de viver",
+            "Te amo demais",
+            "Meu coração bate por você",
+            "Você é tudo pra mim",
+            "Minha paixão",
+            "Amo cada detalhe seu"
+        ];
 
-    function renderMsg() { msg.textContent = mensagens[atual]; }
-    function proxMsg() { if(atual<mensagens.length-1){ atual++; renderMsg();}}
-    function antMsg() { if(atual>0){ atual--; renderMsg();}}
+        let nomeAmado = "";
+        let intervaloParticulas;
 
-    heart.onclick = () => {
-      heart.style.transform = 'scale(1.35)';
-      setTimeout(()=>{heart.style.transform='scale(1)';}, 180);
-      msg.textContent = "💖 " + mensagens[atual];
-    };
-  </script>
+        function iniciarAnimacao() {
+            const nome = document.getElementById('nomeInput').value.trim();
+            if (!nome) {
+                alert('Por favor, digite um nome!');
+                return;
+            }
+
+            nomeAmado = nome;
+            document.getElementById('titulo').textContent = `Para ${nome} ❤️`;
+            document.getElementById('entrada').classList.add('oculto');
+            
+            setTimeout(() => {
+                criarCoracoes();
+                iniciarParticulas();
+            }, 800);
+        }
+
+        function criarCoracoes() {
+            const container = document.getElementById('container');
+            
+            // Embaralhar frases
+            const frasesEmbaralhadas = [...frasesAmor].sort(() => Math.random() - 0.5);
+            
+            // Criar 6 corações
+            for (let i = 0; i < 6; i++) {
+                const coracao = document.createElement('div');
+                coracao.className = 'coracao';
+                coracao.innerHTML = `<div class="texto">${frasesEmbaralhadas[i]}</div>`;
+                
+                // Adicionar evento de clique
+                coracao.addEventListener('click', () => {
+                    explodirCoracao(coracao);
+                });
+                
+                container.appendChild(coracao);
+            }
+        }
+
+        function explodirCoracao(coracao) {
+            // Criar explosão de mini-corações
+            for (let i = 0; i < 8; i++) {
+                const miniCoracao = document.createElement('div');
+                miniCoracao.textContent = '💖';
+                miniCoracao.style.position = 'absolute';
+                miniCoracao.style.left = coracao.offsetLeft + 'px';
+                miniCoracao.style.top = coracao.offsetTop + 'px';
+                miniCoracao.style.fontSize = '24px';
+                miniCoracao.style.color = '#ff6b9d';
+                miniCoracao.style.pointerEvents = 'none';
+                miniCoracao.style.animation = `explosao 1s ease-out forwards`;
+                
+                // Direção aleatória
+                const angulo = (360 / 8) * i;
+                miniCoracao.style.setProperty('--angulo', angulo + 'deg');
+                
+                document.body.appendChild(miniCoracao);
+                
+                setTimeout(() => {
+                    miniCoracao.remove();
+                }, 1000);
+            }
+        }
+
+        function iniciarParticulas() {
+            intervaloParticulas = setInterval(() => {
+                criarParticula();
+            }, 300);
+        }
+
+        function criarParticula() {
+            const particula = document.createElement('div');
+            particula.className = 'particula';
+            particula.textContent = '💖';
+            particula.style.left = Math.random() * 100 + '%';
+            particula.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(particula);
+            
+            setTimeout(() => {
+                particula.remove();
+            }, 4000);
+        }
+
+        function novasMensagens() {
+            // Remover corações existentes
+            const coracoes = document.querySelectorAll('.coracao');
+            coracoes.forEach(coracao => coracao.remove());
+            
+            // Criar novos corações
+            setTimeout(() => {
+                criarCoracoes();
+            }, 300);
+        }
+
+        // Adicionar animação de explosão
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes explosao {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(calc(cos(var(--angulo)) * 100px), calc(sin(var(--angulo)) * 100px)) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
